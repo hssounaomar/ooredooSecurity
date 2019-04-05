@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { connect } from "react-redux";
-import {addEquipement} from '../actions';
+import {addEquipement} from '../actions/equipements.actions';
 import { bindActionCreators } from 'redux'
  class CreateTodo extends Component {
 initiateState =()=>{
@@ -37,7 +37,7 @@ this.props.addEquipement(this.state);
 
     render() {
         return (
-            <div style={{marginTop: 20}}>
+            <div className="creatediv">
                 <h3>Create New Equipement</h3>
                <form onSubmit={this.onSubmit}> 
                     <div className="form-group">

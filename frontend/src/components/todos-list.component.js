@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import {deleteEquipementById} from '../actions';
+import {deleteEquipementById} from '../actions/equipements.actions';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
 
@@ -8,14 +8,14 @@ const Todo = props => (
     
     <tr>
         <td >{props.todo.reference}</td>
-        <td >{props.todo.etat}</td>
-        <td >{props.todo.prix}</td>
-        <td>{props.todo.dateMiseEnService}</td>
-        <td >{props.todo.marque}</td>
-        <td>{props.todo.modele}</td>
-        <td >{props.todo.code}</td>
+        <td >{props.todo.state}</td>
+        <td >{props.todo.price}</td>
+        <td>{props.todo.dateMiseEnService|| "date"}</td>
+        <td >{props.todo.brand}</td>
+        <td>{props.todo.model}</td>
+        <td >{props.todo.qrCode}</td>
         <td>{props.todo.ip}</td>
-        <td >{props.todo.commentaire}</td>
+        <td >{props.todo.comment}</td>
         <td>
             <Link to={"/edit/"+props.todo._id}>Edit</Link>
             <button onClick={()=>{props.delete(props.todo._id)}} >Delete</button>
@@ -52,7 +52,7 @@ const Todo = props => (
         //console.log(this.props.equipements)
         return (
             <div>
-                <h3>Equipement List</h3>
+               
                 <table className="table table-striped" style={{ marginTop: 20 }}>
                     <thead>
                         <tr>
@@ -77,7 +77,6 @@ const Todo = props => (
     }
 }
 function mapStateToProps(state) {
-
     return { equipements:state.equipements,form:state.form.contact };
   }
 

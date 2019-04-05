@@ -9,7 +9,7 @@ import promise from "redux-promise";
 import reducers from "./reducers"; 
 import { BrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import {getEquipements} from './actions';
+import {getEquipements} from './actions/equipements.actions';
 const createStoreWithMiddleware = applyMiddleware(promise,thunk)(createStore);
 const store=createStoreWithMiddleware(reducers);
 store.dispatch(getEquipements());

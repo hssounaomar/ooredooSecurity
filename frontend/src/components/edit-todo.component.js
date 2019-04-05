@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {updateEquipement,getEquipementById} from '../actions';
+import {updateEquipement,getEquipementById} from '../actions/equipements.actions';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
 class EditTodo extends Component {
@@ -150,7 +150,7 @@ onChange =(e) =>{
         )
     }
 }
-function mapStateToProps({equipement},ownProps) {
+function mapStateToProps({equipement}) {
 
     return { equipement};
   }
