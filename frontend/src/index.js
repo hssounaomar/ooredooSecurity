@@ -10,9 +10,11 @@ import reducers from "./reducers";
 import { BrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import {getEquipements} from './actions/equipements.actions';
+import {getSites} from './actions/sites.actions';
 const createStoreWithMiddleware = applyMiddleware(promise,thunk)(createStore);
 const store=createStoreWithMiddleware(reducers);
 store.dispatch(getEquipements());
+store.dispatch(getSites());
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

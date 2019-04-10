@@ -1,0 +1,7 @@
+ var id=document.getElementById("test");
+    id.addEventListener("click",function(){
+    var content= document.getElementById("test1");
+    console.log(content.innerHTML)
+    content.innerHTML += '<div class="active-tag"> test</div>';
+    
+    })
