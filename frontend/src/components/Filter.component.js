@@ -7,40 +7,71 @@ import { bindActionCreators } from 'redux'
 
 class Filter extends Component {
     state ={
-        sites:[]
+        sites:[],
+        sitesType:[],
+        siteType:null
+    }
+    
+    filterSites(){
+        if(this.state.siteType){
+return this.props.sites.filter(item=>{
+    return item.type === this.state.siteType;
+})
+        }
+        return [];
+    }
+    componentWillReceiveProps(nextProps){
+    
+        if(nextProps.sitesType){
+            let siteType=nextProps.sitesType[0];
+            console.log(siteType)
+            if(siteType){
+                this.setState({
+                    sitesType:nextProps.sitesType,
+                
+                siteType:siteType._id
+                    }) 
+            }
+            
+        }
+     
+        
     }
 
    handleChange =(e)=>{
-   // Variable to hold the original version of the list
-   let currentList = [];
-   // Variable to hold the filtered list before putting into state
-let newList = [];
-   
-   // If the search bar isn't empty
+    let currentList =[];
+    let sites =[];
+
 if (e.target.value !== "") {
-       // Assign the original list to currentList
- currentList = this.props.sites;
+     currentList =this.filterSites();
+  
+ 
      
-       // Use .filter() to determine which items should be displayed
-       // based on the search terms
- newList = currentList.filter(item => {
-           // change current item to lowercase
+    
+    sites = currentList.filter(item => {
+      
    const lc = item.name.toLowerCase();
-           // change search term to lowercase
+        
    const filter = e.target.value.toLowerCase();
-           // check to see if the current list item includes the search term
-           // If it does, it will be added to newList. Using lowercase eliminates
-           // issues with capitalization in search terms and search content
+          
    return lc.includes(filter);
  });
-} 
-   // Set the filtered state based on what our rules added to newList
+
+} else{
+    this.setState({
+        sites:this.filterSites()
+    })
+}
 this.setState({
- sites: newList
-});
+    sites
+})
+  
+  
+
    }
-   handleOnBlur =(e)=>{
-     
+
+   handleOnBlur =(e)=>{ 
+     console.log('test')
 this.setState({
     sites:[]
 })
@@ -57,7 +88,30 @@ this.setState({
            )
        })
    }
+   addSiteType =(e)=>{
+    const index = e.target.selectedIndex;
+    const optionElement = e.target.childNodes[index]
+    const siteType =  optionElement.getAttribute('data-id');
+
+     this.setState({
+   
+      siteType
+      })
+  
+}
+   listSitesType (){
+
+    return this.state.sitesType.map((item)=>{
+        
+         return (
+              <option key={item._id} data-id={item._id}>{item.name}</option>
+
+
+         )
+     })
+ }
   render() {
+   
     return (
         <div className="filter__wrap">
             <div className="filter__cart">
@@ -70,13 +124,34 @@ this.setState({
             
           
             		
-            		
+            	
+                <div className="form-group">
+                
+                <div className="alert alert-success alert-dismissible" role="alert"> 
+              
+            <strong>Hello geeks!</strong> 
+              
+       
+            <button type="button" className="btn close" 
+                data-dismiss="alert" aria-label="Close"> 
+                  
+                <span aria-hidden="true">×</span> 
+            </button> 
+        </div>
+    
+    <label>Filter Par Site</label>
+  
+    <select className="form-control" onChange={this.addSiteType} >
+ {this.listSitesType()}
+  
+    </select>
+  </div>	
            <div className="list-group" onMouseUp={()=>this.handleOnBlur()}>   
            <input type="text" className="form-control"  placeholder="Search By type of Site"  onChange={this.handleChange}/>     
            {this.listSites()}
            </div> 
               		
-            
+           
           
      
 
@@ -99,7 +174,7 @@ this.setState({
     }
 }
 function mapStateToProps(state) {
-    return { sites:state.sites,form:state.form.contact };
+    return { sites:state.sites,sitesType:state.sitesType,form:state.form.contact };
   }
 
   export default connect(mapStateToProps)(Filter); 

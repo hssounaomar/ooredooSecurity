@@ -5,7 +5,7 @@ export const GET_EQUIPEMENT="GET_EQUIPEMENT";
 export const UPDATE_EQUIPEMENT="UPDATE_EQUIPEMENT";
 export const REMOVE_EQUIPEMENT="REMOVE_EQUIPEMENT";
 export const ADD_EQUIPEMENT="ADD_EQUIPEMENT";
-export const RECEIVE_EQUIPEMENT="ADD_EQUIPEMENT";
+export const RECEIVE_EQUIPEMENT="RECEIVE_EQUIPEMENT";
 export function addEquipement(equipement){
 
  const request=   axios.post(`${ROOT_URL}/add`,equipement).then(res=>res.data);

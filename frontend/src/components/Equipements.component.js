@@ -68,6 +68,7 @@ this.setState({
             equipements:nextProps.equipements
             })
         }
+
     }
     equipementList (deleteFunction=this.delete) {
         if(this.state.equipements){
